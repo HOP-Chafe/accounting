@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  first_name VARCHAR(150) NOT NULL,
+  last_name VARCHAR(150) NOT NULL,
+  failed_attempts INT UNSIGNED NOT NULL DEFAULT 0,
+  locked_until DATETIME NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO users (username, password_hash, first_name, last_name)
+SELECT 'admin', '$2y$10$aHj3HOUVVia5HHY88zcr0OQot1DiTuOpuR5OWdvAljbdTbDEsjnye', 'Kittipong', 'Phudindong'
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'admin');

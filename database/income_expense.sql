@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS income_expense_records (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    record_date DATE NOT NULL,
+    carry_forward DECIMAL(14,2) NOT NULL DEFAULT 0,
+    income_items LONGTEXT NOT NULL,
+    expense_items LONGTEXT NOT NULL,
+    income_total DECIMAL(14,2) NOT NULL DEFAULT 0,
+    grand_total DECIMAL(14,2) NOT NULL DEFAULT 0,
+    expense_total DECIMAL(14,2) NOT NULL DEFAULT 0,
+    balance DECIMAL(14,2) NOT NULL DEFAULT 0,
+    note VARCHAR(500) NOT NULL DEFAULT '',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_income_expense_date (record_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
